@@ -15,11 +15,19 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
+import io.reactivex.rxjava3.annotations.NonNull;
+import io.reactivex.rxjava3.core.Observable;
+import io.reactivex.rxjava3.core.Observer;
+import io.reactivex.rxjava3.disposables.Disposable;
+import io.reactivex.rxjava3.schedulers.Schedulers;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
+
+    private List<Podcast> podcasts;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,30 +36,34 @@ public class MainActivity extends AppCompatActivity {
 
         PodcastApi podcastApiService = ServiceGenerator.getPodcastApiService();
 
-        Call<PodcastSearchResponse> responseCall = podcastApiService.searchPodcast("dog");
+        Observable<PodcastSearchResponse> observable = podcastApiService.searchPodcasts("reading")
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread());
 
-        responseCall.enqueue(new Callback<PodcastSearchResponse>() {
+        observable.subscribe(new Observer<PodcastSearchResponse>() {
             @Override
-            public void onResponse(Call<PodcastSearchResponse> call, Response<PodcastSearchResponse> response) {
-                Log.d("Response", "onResponse: " + response.toString());
-                if (response.code() == 200) {
-                    Log.d("Response", "onResponse: " + response.body().toString());
-                    List<Podcast> podcasts = new ArrayList<>(response.body().getPodcasts());
+            public void onSubscribe(@NonNull Disposable d) {
 
-                    for(Podcast podcast: podcasts) {
-                        Log.d("Response", "onResponse: " + podcast.getPodcastTitle());
-                    }
-                } else {
-                    try {
-                        Log.d("Response", "onResponse: " + response.errorBody().string());
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
+            }
+
+            @Override
+            public void onNext(@NonNull PodcastSearchResponse podcastSearchResponse) {
+                podcasts = new ArrayList<>();
+                List<Podcast> podcasts = podcastSearchResponse.getPodcasts();
+
+                for (Podcast podcast: podcasts) {
+                    Log.d("Response", "onNext: " + podcast.getPodcastTitle());
+
                 }
             }
 
             @Override
-            public void onFailure(Call<PodcastSearchResponse> call, Throwable t) {
+            public void onError(@NonNull Throwable e) {
+
+            }
+
+            @Override
+            public void onComplete() {
 
             }
         });
