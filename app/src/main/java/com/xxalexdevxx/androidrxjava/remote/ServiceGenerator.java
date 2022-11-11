@@ -14,24 +14,13 @@ public class ServiceGenerator {
         return new Retrofit.Builder()
                 .baseUrl(RequestConstants.BASE_URL)
                 .client(client)
-                .addCallAdapterFactory(RxJava3CallAdapterFactory.create()) // added for rxjava dagger tutorial
+                .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
     }
-
     // this is how we access the retrofit api service from other places
     public static PodcastApi getPodcastApiService() {
         return getRetrofitInstance().create(PodcastApi.class);
     }
 
-
-
-//    private static Retrofit retrofit = retrofitBuilder.build();
-
-//    private static PodcastApi podcastApi = retrofit.create(PodcastApi.class);
-
-    // this will get an instance of the PodcastApi interface so we can make requests
-//    public static PodcastApi getPodcastApi() {
-//        return podcastApi;
-//    }
 }
