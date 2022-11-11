@@ -1,8 +1,10 @@
-package com.xxalexdevxx.androidrxjava;
+package com.xxalexdevxx.androidrxjava.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import com.xxalexdevxx.androidrxjava.R;
 
 public class MainActivity extends AppCompatActivity {
 
