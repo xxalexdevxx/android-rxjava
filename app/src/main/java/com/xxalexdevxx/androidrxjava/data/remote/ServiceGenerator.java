@@ -1,4 +1,4 @@
-package com.xxalexdevxx.androidrxjava.remote;
+package com.xxalexdevxx.androidrxjava.data.remote;
 
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;

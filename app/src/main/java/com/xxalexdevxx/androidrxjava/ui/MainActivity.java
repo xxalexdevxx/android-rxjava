@@ -6,12 +6,11 @@ import android.os.Bundle;
 import android.util.Log;
 
 import com.xxalexdevxx.androidrxjava.R;
-import com.xxalexdevxx.androidrxjava.model.Podcast;
-import com.xxalexdevxx.androidrxjava.remote.PodcastApi;
-import com.xxalexdevxx.androidrxjava.remote.PodcastSearchResponse;
-import com.xxalexdevxx.androidrxjava.remote.ServiceGenerator;
+import com.xxalexdevxx.androidrxjava.data.model.Podcast;
+import com.xxalexdevxx.androidrxjava.data.remote.PodcastApi;
+import com.xxalexdevxx.androidrxjava.data.remote.PodcastSearchResponse;
+import com.xxalexdevxx.androidrxjava.data.remote.ServiceGenerator;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,9 +20,6 @@ import io.reactivex.rxjava3.core.Observable;
 import io.reactivex.rxjava3.core.Observer;
 import io.reactivex.rxjava3.disposables.Disposable;
 import io.reactivex.rxjava3.schedulers.Schedulers;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
 

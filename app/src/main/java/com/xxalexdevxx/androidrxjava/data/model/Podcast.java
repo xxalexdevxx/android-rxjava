@@ -1,4 +1,4 @@
-package com.xxalexdevxx.androidrxjava.model;
+package com.xxalexdevxx.androidrxjava.data.model;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;

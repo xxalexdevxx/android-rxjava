@@ -1,6 +1,4 @@
-package com.xxalexdevxx.androidrxjava.remote;
-
-import com.xxalexdevxx.androidrxjava.remote.RequestConstants;
+package com.xxalexdevxx.androidrxjava.data.remote;
 
 import java.security.MessageDigest;
 import java.util.Calendar;

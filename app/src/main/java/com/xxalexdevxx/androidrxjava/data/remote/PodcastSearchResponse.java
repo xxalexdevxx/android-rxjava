@@ -1,8 +1,8 @@
-package com.xxalexdevxx.androidrxjava.remote;
+package com.xxalexdevxx.androidrxjava.data.remote;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-import com.xxalexdevxx.androidrxjava.model.Podcast;
+import com.xxalexdevxx.androidrxjava.data.model.Podcast;
 
 import java.util.List;
 

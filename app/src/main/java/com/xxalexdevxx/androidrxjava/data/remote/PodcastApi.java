@@ -1,7 +1,6 @@
-package com.xxalexdevxx.androidrxjava.remote;
+package com.xxalexdevxx.androidrxjava.data.remote;
 
 import io.reactivex.rxjava3.core.Observable;
-import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Query;
 
