@@ -5,7 +5,7 @@ import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class ServiceGenerator {
+public class ApiServiceClient {
 
     private static OkHttpClient client = new OkHttpClient.Builder().addInterceptor(new HeaderInterceptor())
             .build();
@@ -19,8 +19,8 @@ public class ServiceGenerator {
                 .build();
     }
     // this is how we access the retrofit api service from other places
-    public static PodcastApi getPodcastApiService() {
-        return getRetrofitInstance().create(PodcastApi.class);
+    public static PodcastApiInterface getPodcastApiService() {
+        return getRetrofitInstance().create(PodcastApiInterface.class);
     }
 
 }
