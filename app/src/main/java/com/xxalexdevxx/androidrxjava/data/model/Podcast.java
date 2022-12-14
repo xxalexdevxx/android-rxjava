@@ -3,7 +3,14 @@ package com.xxalexdevxx.androidrxjava.data.model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.util.List;
+
 public class Podcast {
+
+    @SerializedName("feeds")
+    @Expose()
+    private List<Podcast> podcasts;
+
     //  https://api.podcastindex.org/api/1.0/podcasts/byfeedid?id=
     // temp note: variable names differ from the api variable names
     @SerializedName("id")
@@ -50,6 +57,10 @@ public class Podcast {
     }
 
     public Podcast() {
+    }
+
+    public List<Podcast> getPodcasts() {
+        return podcasts;
     }
 
     public String getPodcastId() {

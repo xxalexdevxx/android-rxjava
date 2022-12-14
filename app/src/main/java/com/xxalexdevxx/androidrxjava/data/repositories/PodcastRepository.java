@@ -4,7 +4,7 @@ import android.util.Log;
 
 import com.xxalexdevxx.androidrxjava.data.model.Podcast;
 import com.xxalexdevxx.androidrxjava.data.remote.PodcastApiInterface;
-import com.xxalexdevxx.androidrxjava.data.remote.PodcastSearchResponse;
+//import com.xxalexdevxx.androidrxjava.data.remote.PodcastSearchResponse;
 import com.xxalexdevxx.androidrxjava.data.remote.ApiServiceClient;
 
 import java.util.ArrayList;
@@ -18,6 +18,9 @@ import io.reactivex.rxjava3.schedulers.Schedulers;
 
 
 import io.reactivex.rxjava3.disposables.Disposable;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class PodcastRepository {
 
@@ -28,24 +31,24 @@ public class PodcastRepository {
 
     PodcastApiInterface podcastApiService = ApiServiceClient.getPodcastApiService();
 
-    Observable<PodcastSearchResponse> observable = podcastApiService.searchPodcasts("dog")
+    @NonNull Observable<Podcast> observable = podcastApiService.searchPodcasts("fish")
             .subscribeOn(Schedulers.newThread())
             .observeOn(AndroidSchedulers.mainThread());
 
-    public Observable<PodcastSearchResponse> getPodcasts() {
-        observable.subscribe(new Observer<PodcastSearchResponse>() {
+    public void getPodcasts() {
+        observable.subscribe(new Observer<Podcast>() {
             @Override
             public void onSubscribe(@NonNull Disposable d) {
 
             }
 
             @Override
-            public void onNext(@NonNull PodcastSearchResponse podcastSearchResponse) {
+            public void onNext(@NonNull Podcast podcast) {
                 podcasts = new ArrayList<>();
-                List<Podcast> podcasts = podcastSearchResponse.getPodcasts();
+                podcasts = podcast.getPodcasts();
 
-                for (Podcast podcast: podcasts) {
-                    Log.d("Response", "onNext: " + podcast.getPodcastTitle());
+                for (Podcast thePodcast : podcasts) {
+                    Log.d("Response", "onNext: " + thePodcast.getPodcastTitle());
                 }
             }
 
@@ -59,7 +62,33 @@ public class PodcastRepository {
 
             }
         });
+    }}
 
-        return observable;
-    }
-}
+
+
+
+//    public void testRetrofit() {
+//        PodcastApiInterface podcastApiInterface;
+//
+//        podcastApiInterface = ApiServiceClient.getPodcastApiService();
+//
+//        Call<Podcast> call = podcastApiInterface.searchPodcasts("dog");
+//
+//        call.enqueue(new Callback<Podcast>() {
+//            @Override
+//            public void onResponse(Call<Podcast> call, Response<Podcast> response) {
+//                Log.d("Response", "onResponse: " + response.code());
+//
+//                List<Podcast> podcasts = response.body().getPodcasts();
+//
+//                for (Podcast podcast : podcasts) {
+//                    Log.d("response", "onResponse: " + podcast.getPodcastTitle());
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(Call<Podcast> call, Throwable t) {
+//
+//            }
+//        });
+
