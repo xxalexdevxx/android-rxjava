@@ -6,6 +6,7 @@ import com.xxalexdevxx.androidrxjava.data.model.Podcast;
 import com.xxalexdevxx.androidrxjava.data.remote.PodcastApiInterface;
 //import com.xxalexdevxx.androidrxjava.data.remote.PodcastSearchResponse;
 import com.xxalexdevxx.androidrxjava.data.remote.ApiServiceClient;
+import com.xxalexdevxx.androidrxjava.data.remote.PodcastSearchResponse;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,6 +15,7 @@ import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.annotations.NonNull;
 import io.reactivex.rxjava3.core.Observable;
 import io.reactivex.rxjava3.core.Observer;
+import io.reactivex.rxjava3.disposables.CompositeDisposable;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 
 
@@ -24,45 +26,94 @@ import retrofit2.Response;
 
 public class PodcastRepository {
 
-    private List<Podcast> podcasts;
+    private PodcastApiInterface podcastApiInterface;
 
     public PodcastRepository() {
+        podcastApiInterface = ApiServiceClient.getPodcastApiService();
     }
 
-    PodcastApiInterface podcastApiService = ApiServiceClient.getPodcastApiService();
+    public Observable<List<Podcast>> searchPodcasts() {
+        return podcastApiInterface.searchPodcasts("dog").map(PodcastSearchResponse::getFeeds);
+    }
 
-    @NonNull Observable<Podcast> observable = podcastApiService.searchPodcasts("fish")
-            .subscribeOn(Schedulers.newThread())
-            .observeOn(AndroidSchedulers.mainThread());
 
-    public void getPodcasts() {
-        observable.subscribe(new Observer<Podcast>() {
-            @Override
-            public void onSubscribe(@NonNull Disposable d) {
 
-            }
 
-            @Override
-            public void onNext(@NonNull Podcast podcast) {
-                podcasts = new ArrayList<>();
-                podcasts = podcast.getPodcasts();
 
-                for (Podcast thePodcast : podcasts) {
-                    Log.d("Response", "onNext: " + thePodcast.getPodcastTitle());
-                }
-            }
 
-            @Override
-            public void onError(@NonNull Throwable e) {
+//    private List<Podcast> podcasts;
 
-            }
+//    public PodcastRepository() {
+//    }
 
-            @Override
-            public void onComplete() {
 
-            }
-        });
-    }}
+
+//
+//
+//    PodcastApiInterface podcastApiService = ApiServiceClient.getPodcastApiService();
+//
+//    Observable<List<Podcast>> observable = podcastApiService.searchPodcasts("dog")
+//            .subscribeOn(Schedulers.newThread())
+//            .observeOn(AndroidSchedulers.mainThread());
+
+
+
+
+}
+
+
+
+
+//
+//    PodcastApiInterface podcastApiService = ApiServiceClient.getPodcastApiService();
+//
+//    @NonNull Observable<Podcast> observable = podcastApiService.searchPodcasts("fish")
+//            .subscribeOn(Schedulers.newThread())
+//            .observeOn(AndroidSchedulers.mainThread());
+//
+//    public void getPodcasts() {
+//        observable.subscribe(new Observer<Podcast>() {
+//            @Override
+//            public void onSubscribe(@NonNull Disposable d) {
+//
+//            }
+//
+//            @Override
+//            public void onNext(@NonNull Podcast podcast) {
+//                podcasts = new ArrayList<>();
+//                podcasts = podcast.getPodcasts();
+//
+//                for (Podcast thePodcast : podcasts) {
+//                    Log.d("Response", "onNext: " + thePodcast.getPodcastTitle());
+//                }
+//            }
+//
+//            @Override
+//            public void onError(@NonNull Throwable e) {
+//
+//            }
+//
+//            @Override
+//            public void onComplete() {
+//
+//            }
+//        });
+//    }}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

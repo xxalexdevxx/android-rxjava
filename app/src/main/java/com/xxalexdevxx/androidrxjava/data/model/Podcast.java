@@ -7,9 +7,19 @@ import java.util.List;
 
 public class Podcast {
 
-    @SerializedName("feeds")
-    @Expose()
-    private List<Podcast> podcasts;
+//    @SerializedName("feeds")
+//    @Expose()
+//    private List<Podcast> podcasts;
+//
+//    public List<Podcast> getPodcasts() {
+//        return podcasts;
+//    }
+
+
+
+
+
+
 
     //  https://api.podcastindex.org/api/1.0/podcasts/byfeedid?id=
     // temp note: variable names differ from the api variable names
@@ -57,10 +67,6 @@ public class Podcast {
     }
 
     public Podcast() {
-    }
-
-    public List<Podcast> getPodcasts() {
-        return podcasts;
     }
 
     public String getPodcastId() {

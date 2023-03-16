@@ -8,7 +8,19 @@ import java.util.List;
 
 // search for a podcast by term
 //https://api.podcastindex.org/api/1.0/search/bytitle?q=the+art+of+manliness
-//public class PodcastSearchResponse {
+public class PodcastSearchResponse {
+
+    private List<Podcast> feeds;
+
+    // add getter and setter for the feeds field
+    public List<Podcast> getFeeds() {
+        return feeds;
+    }
+
+    public void setFeeds(List<Podcast> feeds) {
+        this.feeds = feeds;
+    }
+
 //
 //    @SerializedName("count") // number of podcasts found from search by term
 //    @Expose()
@@ -33,4 +45,4 @@ import java.util.List;
 //                ", podcasts=" + podcasts +
 //                '}';
 //    }
-//}
+}
